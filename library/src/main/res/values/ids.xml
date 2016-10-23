@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <item type="id" name="qtc_loadingViewId"/>
+    <item type="id" name="qtc_errorViewId"/>
+    <item type="id" name="qtc_emptyViewId"/>
+    <item type="id" name="qtc_contentViewId"/>
+</resources>

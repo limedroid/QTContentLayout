@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@android:color/white"
+    android:orientation="vertical">
+
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="45dp"
+        android:background="#ff4377"
+        android:gravity="center"
+        android:text="QTContentLayout"
+        android:textColor="@android:color/white"
+        android:textSize="20sp" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="35dp"
+        android:layout_marginTop="5dp"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/bt_showLoading"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="#ff665d"
+            android:text="showLoading"
+            android:textColor="@android:color/white" />
+
+        <view
+            android:layout_width="0.5dp"
+            android:layout_height="match_parent"
+            android:background="@android:color/white" />
+
+        <Button
+            android:id="@+id/bt_showError"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="#67665d"
+            android:text="showError"
+            android:textColor="@android:color/white" />
+
+    </LinearLayout>
+
+    <view
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"
+        android:background="@android:color/white" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="35dp"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/bt_showEmpty"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="#ab7865"
+            android:text="showEmpty"
+            android:textColor="@android:color/white" />
+
+        <view
+            android:layout_width="0.5dp"
+            android:layout_height="match_parent"
+            android:background="@android:color/white" />
+
+        <Button
+            android:id="@+id/bt_showContent"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="#854678"
+            android:text="showContent"
+            android:textColor="@android:color/white" />
+
+    </LinearLayout>
+
+    <cn.droidlover.qtcontentlayout.QTContentLayout
+        android:id="@+id/contentLayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="5dp"
+        app:cl_emptyLayoutId="@layout/view_empty"
+        app:cl_errorLayoutId="@layout/view_error"
+        app:cl_loadingLayoutId="@layout/view_loading">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="#854678"
+            android:gravity="center"
+            android:text="content"
+            android:textColor="@android:color/white"
+            android:textSize="28sp" />
+
+    </cn.droidlover.qtcontentlayout.QTContentLayout>
+
+
+</LinearLayout>
