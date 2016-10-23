@@ -57,9 +57,6 @@ public class QTContentLayout extends FrameLayout {
     protected void onFinishInflate() {
         super.onFinishInflate();
 
-        if (contentLayoutId == -1) {
-
-        }
         int childCount = getChildCount();
         if (childCount > 4) {
             throw new IllegalStateException("QTContentLayout can only host 4 elements");
