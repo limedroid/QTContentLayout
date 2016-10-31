@@ -75,10 +75,10 @@ public class QTContentLayout extends FrameLayout {
                 throw new IllegalStateException("ContentView can not be null");
             }
 
-            addView(loadingView);
-            addView(errorView);
-            addView(emptyView);
-            addView(contentView);
+            bindView(loadingView, STATE_LOADING);
+            bindView(errorView, STATE_ERROR);
+            bindView(emptyView, STATE_EMPTY);
+            bindView(contentView, STATE_CONTENT);
 
             if (loadingView != null) {
                 setDisplayState(STATE_LOADING);
@@ -128,9 +128,37 @@ public class QTContentLayout extends FrameLayout {
         }
     }
 
-    @Override
-    public void addView(View child) {
+    public void bindView(View child, int state) {
         if (child != null) {
+            if (state == STATE_LOADING) {
+                if (loadingView != null) {
+                    removeView(loadingView);
+                    loadingView = null;
+                }
+                loadingView = child;
+            }
+            if (state == STATE_EMPTY) {
+                if (emptyView != null) {
+                    removeView(emptyView);
+                    emptyView = null;
+                }
+                emptyView = child;
+            }
+            if (state == STATE_ERROR) {
+                if (errorView != null) {
+                    removeView(errorView);
+                    errorView = null;
+                }
+                errorView = child;
+            }
+            if (state == STATE_CONTENT) {
+                if (contentView != null) {
+                    removeView(contentView);
+                    contentView = null;
+                }
+                contentView = child;
+            }
+
             ViewParent parent = child.getParent();
             if (parent == null || parent != this) {
                 super.addView(child);
@@ -156,9 +184,7 @@ public class QTContentLayout extends FrameLayout {
     }
 
 
-
-
-    static class SavedState extends BaseSavedState{
+    static class SavedState extends BaseSavedState {
         int state;
 
         SavedState(Parcelable superState) {
@@ -195,36 +221,36 @@ public class QTContentLayout extends FrameLayout {
 
     }
 
-    public void showContent(){
+    public void showContent() {
         setDisplayState(STATE_CONTENT);
     }
 
-    public void showEmpty(){
+    public void showEmpty() {
         setDisplayState(STATE_EMPTY);
     }
 
-    public void showError(){
+    public void showError() {
         setDisplayState(STATE_ERROR);
     }
 
-    public void showLoading(){
+    public void showLoading() {
         setDisplayState(STATE_LOADING);
     }
 
     //-------
 
     public QTContentLayout loadingView(View loadingView) {
-        this.loadingView = loadingView;
+        bindView(loadingView, STATE_LOADING);
         return this;
     }
 
     public QTContentLayout errorView(View errorView) {
-        this.errorView = errorView;
+        bindView(errorView, STATE_ERROR);
         return this;
     }
 
     public QTContentLayout emptyView(View emptyView) {
-        this.emptyView = emptyView;
+        bindView(emptyView, STATE_EMPTY);
         return this;
     }
 
