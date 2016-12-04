@@ -19,16 +19,18 @@ public class QTContentLayout extends FrameLayout {
     View emptyView;
     View contentView;
 
-    int loadingLayoutId;
-    int errorLayoutId;
-    int emptyLayoutId;
-    int contentLayoutId;
+    int loadingLayoutId = RES_NONE;
+    int errorLayoutId = RES_NONE;
+    int emptyLayoutId = RES_NONE;
+    int contentLayoutId = RES_NONE;
 
     public static final int STATE_LOADING = 0x1;
     public static final int STATE_ERROR = 0x2;
     public static final int STATE_EMPTY = 0x3;
     public static final int STATE_CONTENT = 0x4;
     int displayState = STATE_LOADING;
+
+    static final int RES_NONE = -1;
 
     public QTContentLayout(Context context) {
         super(context, null);
@@ -45,10 +47,10 @@ public class QTContentLayout extends FrameLayout {
 
     private void initAttrs(Context context, AttributeSet attr) {
         TypedArray typedArray = context.obtainStyledAttributes(attr, R.styleable.QTContentLayout);
-        loadingLayoutId = typedArray.getResourceId(R.styleable.QTContentLayout_cl_loadingLayoutId, -1);
-        errorLayoutId = typedArray.getResourceId(R.styleable.QTContentLayout_cl_errorLayoutId, -1);
-        emptyLayoutId = typedArray.getResourceId(R.styleable.QTContentLayout_cl_emptyLayoutId, -1);
-        contentLayoutId = typedArray.getResourceId(R.styleable.QTContentLayout_cl_contentLayoutId, -1);
+        loadingLayoutId = typedArray.getResourceId(R.styleable.QTContentLayout_cl_loadingLayoutId, RES_NONE);
+        errorLayoutId = typedArray.getResourceId(R.styleable.QTContentLayout_cl_errorLayoutId, RES_NONE);
+        emptyLayoutId = typedArray.getResourceId(R.styleable.QTContentLayout_cl_emptyLayoutId, RES_NONE);
+        contentLayoutId = typedArray.getResourceId(R.styleable.QTContentLayout_cl_contentLayoutId, RES_NONE);
         typedArray.recycle();
     }
 
@@ -61,10 +63,19 @@ public class QTContentLayout extends FrameLayout {
         if (childCount > 4) {
             throw new IllegalStateException("QTContentLayout can only host 4 elements");
         } else {
-            loadingView = findViewById(loadingLayoutId);
-            errorView = findViewById(errorLayoutId);
-            emptyView = findViewById(emptyLayoutId);
-            contentView = findViewById(contentLayoutId);
+            if (loadingLayoutId != RES_NONE) {
+                loadingView = inflate(getContext(), loadingLayoutId, this);
+            }
+            if (errorLayoutId != RES_NONE) {
+                errorView = inflate(getContext(), errorLayoutId, this);
+            }
+            if (emptyLayoutId != RES_NONE) {
+                emptyView = inflate(getContext(), emptyLayoutId, this);
+            }
+            if (contentLayoutId != RES_NONE) {
+                contentView = inflate(getContext(), contentLayoutId, this);
+            }
+
 
             if (contentView == null) {
                 if (childCount == 1) {
