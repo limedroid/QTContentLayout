@@ -5,6 +5,7 @@ import android.content.res.TypedArray;
 import android.os.Parcel;
 import android.os.Parcelable;
 import android.util.AttributeSet;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewParent;
 import android.widget.FrameLayout;
@@ -33,11 +34,11 @@ public class QTContentLayout extends FrameLayout {
     static final int RES_NONE = -1;
 
     public QTContentLayout(Context context) {
-        super(context, null);
+        this(context, null);
     }
 
     public QTContentLayout(Context context, AttributeSet attrs) {
-        super(context, attrs, 0);
+        this(context, attrs, 0);
     }
 
     public QTContentLayout(Context context, AttributeSet attrs, int defStyleAttr) {
@@ -64,16 +65,16 @@ public class QTContentLayout extends FrameLayout {
             throw new IllegalStateException("QTContentLayout can only host 4 elements");
         } else {
             if (loadingLayoutId != RES_NONE) {
-                loadingView = inflate(getContext(), loadingLayoutId, this);
+                loadingView = LayoutInflater.from(getContext()).inflate(loadingLayoutId,this,false);
             }
             if (errorLayoutId != RES_NONE) {
-                errorView = inflate(getContext(), errorLayoutId, this);
+                errorView = LayoutInflater.from(getContext()).inflate(errorLayoutId,this,false);
             }
             if (emptyLayoutId != RES_NONE) {
-                emptyView = inflate(getContext(), emptyLayoutId, this);
+                emptyView = LayoutInflater.from(getContext()).inflate(emptyLayoutId,this,false);
             }
             if (contentLayoutId != RES_NONE) {
-                contentView = inflate(getContext(), contentLayoutId, this);
+                contentView = LayoutInflater.from(getContext()).inflate(contentLayoutId,this,false);
             }
 
 
@@ -218,17 +219,17 @@ public class QTContentLayout extends FrameLayout {
         }
 
         public static final Creator<SavedState> CREATOR =
-                new Creator<SavedState>() {
-                    @Override
-                    public SavedState createFromParcel(Parcel in) {
-                        return new SavedState(in);
-                    }
+            new Creator<SavedState>() {
+                @Override
+                public SavedState createFromParcel(Parcel in) {
+                    return new SavedState(in);
+                }
 
-                    @Override
-                    public SavedState[] newArray(int size) {
-                        return new SavedState[size];
-                    }
-                };
+                @Override
+                public SavedState[] newArray(int size) {
+                    return new SavedState[size];
+                }
+            };
 
     }
 
